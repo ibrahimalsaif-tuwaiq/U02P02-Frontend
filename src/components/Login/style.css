@@ -1,0 +1,135 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap");
+
+:root {
+  --page-bg: #f9f5f2;
+  --bg: #f0f4f3;
+  --theme: #f7694d;
+  --theme-two: #ffffff;
+  --text: #697a79;
+}
+
+.loginWrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--page-bg);
+}
+
+main.panel {
+  max-width: 900px;
+  width: 90vw;
+  background: var(--theme-two);
+  border-radius: 20px;
+  box-shadow: 0 2px 5px -6px var(--text), 0 0 30px -50px var(--text);
+  display: flex;
+}
+
+main.panel .panel__half {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 2;
+  padding: 2rem 1rem;
+}
+
+main.panel h2 {
+  font-family: "Outfit", sans-serif;
+  font-size: 1.9rem;
+  text-transform: capitalize;
+  margin-bottom: 1rem;
+}
+
+main.panel p {
+  font-family: "Outfit", sans-serif;
+  margin: 0.5rem 0 2rem;
+  max-width: 25ch;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  font-weight: 300;
+  text-align: center;
+}
+
+main.panel button {
+  color: inherit;
+  font-family: "Outfit", sans-serif;
+}
+
+main.panel form {
+  display: flex;
+  flex-direction: column;
+}
+
+main.panel form input {
+  margin: 0.5rem 0;
+  width: 200px;
+  border-radius: 50px;
+  padding: 1rem 0.75rem;
+  background: var(--bg);
+  border: none;
+  color: inherit;
+  font-family: "Outfit", sans-serif;
+}
+
+main.panel form input::placeholder {
+  opacity: 0.8;
+}
+
+main.panel #submitButton,
+main.panel #signupButton {
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 50px;
+  padding: 0.85rem 2.75rem;
+  margin: 2rem 0;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+}
+
+.panel__half.half--first {
+  flex-grow: 2;
+  border-radius: inherit;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.panel__half.half--first #submitButton {
+  background: var(--theme);
+  color: var(--theme-two);
+}
+
+.panel__half.half--first #submitButton:hover {
+  cursor: pointer;
+}
+
+.panel__half.half--second {
+  background: var(--theme-two);
+  color: var(--theme);
+}
+
+.panel__half.half--second #signupButton:hover {
+  cursor: pointer;
+}
+
+.panel__half.half--second {
+  background: var(--theme);
+  color: var(--theme-two);
+  padding: 2rem;
+  flex-grow: 1;
+  border-radius: inherit;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+@media (max-width: 650px) {
+  main.panel {
+    flex-direction: column;
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    box-shadow: none;
+  }
+}
