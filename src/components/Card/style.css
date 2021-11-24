@@ -1,0 +1,71 @@
+.card {
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+}
+
+/* Header */
+
+.card .postHeader {
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.card .postHeader .userAvatar img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 1.75rem;
+}
+
+.card .postHeader .userName {
+  padding-left: 0.8rem;
+  font-weight: bold;
+  color: #262626;
+}
+
+.card .postHeader .userAvatar img,
+.card .postHeader .userName {
+  cursor: pointer;
+}
+
+/* Image */
+
+.card .postImage {
+  width: 100%;
+  height: 100%;
+}
+
+/* Status */
+
+.card .status {
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card .likeComment {
+  color: #262626;
+  display: flex;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.card .likeComment img {
+  width: 100%;
+  height: 100%;
+  margin-right: 0.2rem;
+}
+
+.card .likeComment p {
+  margin-right: 0.6rem;
+}
+
+.card .viewPost button {
+  border: none;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.7rem;
+  background-color: #f7694d;
+  color: white;
+  font-weight: bold;
+}

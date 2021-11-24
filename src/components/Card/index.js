@@ -1,27 +1,44 @@
 import React from "react";
-import axios from "axios";
-import NavBar from "./../NavBar";
 import "./style.css";
 
-const BASE_URL = "http://localhost:5000";
-
-const Home = () => {
-
-  const sendPost = async () => {
-    const res = await axios.post(`${BASE_URL}/posts`, {
-      image: 'identifier',
-      location: "ghsssf, Saudi Arabia",
-      creator: 'password',
-    });
-    console.log(res.data);
-  };
-
+const Card = ({ card }) => {
   return (
-    <div>
-      <NavBar/>
-
+    <div className="card">
+      <div className="postHeader">
+        <div className="userAvatar">
+          <img
+            src={card.creator.avatar}
+            alt={`${card.creator.username} avatar`}
+          ></img>
+        </div>
+        <div className="userName">
+          <p>{card.creator.username}</p>
+        </div>
+      </div>
+      <img
+        className="postImage"
+        src={card.image}
+        alt={`${card.creator.username} post`}
+      ></img>
+      <div className="status">
+        <div className="likeComment">
+          <img
+            src="https://cdn4.iconfinder.com/data/icons/app-custom-ui-1/48/Heart-128.png"
+            alt="like icon"
+          ></img>
+          <p>{card.likes.length}</p>
+          <img
+            src="https://cdn4.iconfinder.com/data/icons/app-custom-ui-1/48/Chat_bubble-128.png"
+            alt="comment icon"
+          ></img>
+          <p>{card.comments.length}</p>
+        </div>
+        <div className="viewPost">
+          <button>VIEW</button>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default Home;
+export default Card;
