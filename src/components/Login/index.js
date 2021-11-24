@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
 
 const BASE_URL = "http://localhost:5000";
 
 const Login = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -28,7 +28,7 @@ const Login = () => {
         "user",
         JSON.stringify({ id: res.data._id, username: res.data.username })
       );
-      // navigate("/todos");
+      navigate("/home");
     } else {
       setMessage(res.data);
     }

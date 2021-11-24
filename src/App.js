@@ -4,6 +4,7 @@ import Landing from "./components/Landing";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 
 const App = () => {
