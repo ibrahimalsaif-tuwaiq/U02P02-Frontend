@@ -1,26 +1,87 @@
-import React from "react";
-// import axios from "axios";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import NavBar from "./../NavBar";
-import Cards from "./../Cards";
+import Card from "./../Card";
+import { AiOutlinePlus } from "react-icons/ai";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import "./style.css";
 
-// const BASE_URL = "http://localhost:5000";
+const MySwal = withReactContent(Swal);
+
+const BASE_URL = "http://localhost:5000";
 
 const Home = () => {
+  const [user, setUser] = useState(null);
+  const [postCards, setPostCards] = useState([]);
 
-  // const sendPost = async () => {
-  //   const res = await axios.post(`${BASE_URL}/posts`, {
-  //     image: 'identifier',
-  //     location: "ghsssf, Saudi Arabia",
-  //     creator: 'password',
-  //   });
-  //   console.log(res.data);
-  // };
+  useEffect(() => {
+    getUserDetails();
+    getPosts();
+    // eslint-disable-next-line
+  }, []);
+
+  // useEffect(() => {
+  //   const userStorage = localStorage.getItem("user");
+  //   setUser(JSON.parse(userStorage));
+  // }, []);
+
+  const getUserDetails = async () => {
+    const userStorage = localStorage.getItem("user");
+    const userData = JSON.parse(userStorage);
+    const res = await axios.get(`${BASE_URL}/users/${userData.id}`);
+    setUser(res.data);
+  };
+
+  const getPosts = async () => {
+    const res = await axios.get(`${BASE_URL}/posts`);
+    setPostCards(res.data);
+  };
+
+  const addPost = () => {
+    MySwal.fire({
+      title: "Add New Post",
+      html:
+        '<input id="swal-input1" class="swal2-input" placeholder="Image link">' +
+        '<input id="swal-input2" class="swal2-input" placeholder="City">' +
+        '<input id="swal-input3" class="swal2-input" placeholder="Country">',
+      preConfirm: () => {
+        return [
+          document.getElementById("swal-input1").value,
+          document.getElementById("swal-input2").value,
+          document.getElementById("swal-input3").value,
+        ];
+      },
+    }).then(async (formValues) => {
+      await axios
+        .post(`${BASE_URL}/posts`, {
+          image: formValues.value[0],
+          location: `${formValues.value[1]}, ${formValues.value[2]}`,
+          creator: user._id,
+        })
+        .then(MySwal.fire("Done", "", "success"));
+      // .catch(MySwal.fire("Oops Somthing went wrong", "", "error"));
+    });
+  };
 
   return (
     <div>
-      <NavBar/>
-      <Cards/>
+      <NavBar />
+      <div className="cards">
+        {user ? postCards.map((card) => {
+          if (user.likes.find(post => post._id === card._id)) {
+            if (card.creator._id === user._id) return <Card card={card} likeState={true} deleteState={true} key={card._id} />;
+            else return <Card card={card} likeState={true} deleteState={false} key={card._id} />;
+          } 
+          else {
+            if (card.creator._id === user._id) return <Card card={card} likeState={false} deleteState={true} key={card._id} />;
+            else return <Card card={card} likeState={false} deleteState={false} key={card._id} />;
+          }
+        }) : ''}
+      </div>
+      <button id="fixedbutton" onClick={addPost}>
+        <AiOutlinePlus />
+      </button>
     </div>
   );
 };

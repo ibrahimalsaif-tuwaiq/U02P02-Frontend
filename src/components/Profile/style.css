@@ -1,0 +1,44 @@
+.profileWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileBox {
+  border: 1px solid black;
+  margin: 2rem;
+  padding: 2rem;
+  width: 60%;
+  border-radius: 1.75rem;
+}
+
+.userInfo {
+  display: flex;
+}
+
+.userInfo img {
+  height: 3rem;
+  width: 3rem;
+  border-radius: 1.7rem;
+}
+
+.userInfo p {
+  font-size: 180%;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.editUser {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.editUserIcon {
+  font-size: 130%;
+  margin-left: 1rem;
+}
+
+.editUserIcon:hover {
+  cursor: pointer;
+}

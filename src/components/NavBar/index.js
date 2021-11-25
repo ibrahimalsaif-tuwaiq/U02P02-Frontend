@@ -30,16 +30,16 @@ const NavBar = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
-              <Nav.Link onClick={() => navigate("/")}>TimeLine</Nav.Link>
+              <Nav.Link onClick={() => navigate("/home")}>Home</Nav.Link>
+              <Nav.Link onClick={() => navigate("/timeline")}>TimeLine</Nav.Link>
             </Nav>
             <Nav>
               <NavDropdown
                 title={user ? user.username : "User Settings"}
                 id="collasible-nav-dropdown"
               >
-                <NavDropdown.Item onClick={() => navigate("/")}>Profile</NavDropdown.Item>
-                <NavDropdown.Item onClick={() => navigate("/")}>Settings</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate(`/`)}>Profile</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate(`/profile/${user.id}`)}>Settings</NavDropdown.Item>
                 <NavDropdown.Item onClick={signout}>Logout</NavDropdown.Item>
               </NavDropdown>
             </Nav>

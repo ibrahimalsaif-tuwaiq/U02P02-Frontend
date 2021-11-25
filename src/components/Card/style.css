@@ -5,27 +5,19 @@
 
 /* Header */
 
-.card .postHeader {
-  padding: 0.5rem;
+.postLocation {
+  padding: 0.3rem;
   display: flex;
   align-items: center;
 }
 
-.card .postHeader .userAvatar img {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 1.75rem;
+.postLocation .locationIcon {
+  font-size: 120%;
 }
 
-.card .postHeader .userName {
-  padding-left: 0.8rem;
-  font-weight: bold;
-  color: #262626;
-}
-
-.card .postHeader .userAvatar img,
-.card .postHeader .userName {
-  cursor: pointer;
+.postLocation h6 {
+  font-size: 98%;
+  margin-left: 0.5rem;
 }
 
 /* Image */
@@ -45,23 +37,35 @@
 }
 
 .card .likeComment {
-  color: #262626;
   display: flex;
-  height: 1.5rem;
-  width: 1.5rem;
+  align-items: center;
 }
 
-.card .likeComment img {
-  width: 100%;
-  height: 100%;
+.card .likeComment .likeIcon {
+  color: red;
+}
+
+.card .likeComment .likeIcon,
+.card .likeComment .unLikeIcon,
+.card .likeComment .commentIcon {
   margin-right: 0.2rem;
+  font-size: 190%;
+}
+
+.card .likeComment .likeIcon:hover,
+.card .likeComment .unLikeIcon:hover,
+.card .likeComment .commentIcon:hover {
+  cursor: pointer;
 }
 
 .card .likeComment p {
+  font-size: 140%;
+  color: #262626;
   margin-right: 0.6rem;
 }
 
 .card .viewPost button {
+  font-size: 90%;
   border: none;
   padding: 0.2rem 0.4rem;
   border-radius: 0.7rem;

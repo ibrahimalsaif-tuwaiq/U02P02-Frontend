@@ -1,36 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { IoLocationSharp } from "react-icons/io5";
+import { BsTrashFill } from "react-icons/bs";
+import { MdOutlineComment, MdFavorite, MdFavoriteBorder } from "react-icons/md";
 import "./style.css";
 
-const Card = ({ card }) => {
+const BASE_URL = "http://localhost:5000";
+
+const Card = ({ card, likeState, deleteState }) => {
+  const [like, setLike] = useState(likeState);
+  const [deleteIcon, setDeleteIcon] = useState(deleteState);
+
+  const likePost = async () => {
+    console.log('like');
+    const userStorage = localStorage.getItem("user");
+    const userData = JSON.parse(userStorage);
+    await axios.put(`${BASE_URL}/posts/addLike`, {
+      userId: userData.id,
+      postId: card._id,
+    });
+    setLike(true);
+  };
+
+  const deleteLikedPost = async () => {
+    console.log('delete like');
+    const userStorage = localStorage.getItem("user");
+    const userData = JSON.parse(userStorage);
+    await axios.put(`${BASE_URL}/posts/deleteLike`, {
+      userId: userData.id,
+      postId: card._id,
+    });
+    setLike(false);
+  };
+
+  const deletePost = async () => {
+    console.log('delete post');
+    await axios.put(`${BASE_URL}/posts/${card._id}`);
+  };
+
   return (
     <div className="card">
-      <div className="postHeader">
-        <div className="userAvatar">
-          <img
-            src={card.creator.avatar}
-            alt={`${card.creator.username} avatar`}
-          ></img>
-        </div>
-        <div className="userName">
-          <p>{card.creator.username}</p>
-        </div>
+      <div className="postLocation">
+        <IoLocationSharp className="locationIcon" />
+        <h6>{card.location}</h6>
+        {deleteIcon && <BsTrashFill onClick={deletePost} />}
       </div>
       <img
         className="postImage"
         src={card.image}
-        alt={`${card.creator.username} post`}
+        alt={`${card.location} post`}
       ></img>
       <div className="status">
         <div className="likeComment">
-          <img
-            src="https://cdn4.iconfinder.com/data/icons/app-custom-ui-1/48/Heart-128.png"
-            alt="like icon"
-          ></img>
+          {like ? (
+            <MdFavorite className="likeIcon" onClick={deleteLikedPost} />
+          ) : (
+            <MdFavoriteBorder className="unLikeIcon" onClick={likePost} />
+          )}
           <p>{card.likes.length}</p>
-          <img
-            src="https://cdn4.iconfinder.com/data/icons/app-custom-ui-1/48/Chat_bubble-128.png"
-            alt="comment icon"
-          ></img>
+          <MdOutlineComment className="commentIcon" />
           <p>{card.comments.length}</p>
         </div>
         <div className="viewPost">
