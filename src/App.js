@@ -6,6 +6,7 @@ import Timeline from "./components/Timeline";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
+import Post from "./components/Post";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -19,7 +20,7 @@ const App = () => {
         <Route exact path="/signup" element={<Signup />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/profile" element={<Profile />} />
-        {/* <Route exact path="/posts/:id" element={} /> */}
+        <Route exact path="/posts/:id" element={<Post />} />
         {/* <Route exact path="/users/:id" element={} /> */}
         {/* <Route exact path="/users/:id/likes" element={} /> */}
         {/* <Route exact path="/users/:id/posts" element={} /> */}

@@ -70,12 +70,12 @@ const Home = () => {
       <div className="cards">
         {user ? postCards.map((card) => {
           if (user.likes.find(post => post._id === card._id)) {
-            if (card.creator._id === user._id) return <Card card={card} likeState={true} deleteState={true} key={card._id} />;
-            else return <Card card={card} likeState={true} deleteState={false} key={card._id} />;
+            if (card.creator._id === user._id) return <Card card={card} likeStatus={true} deleteStatus={true} render={getPosts} key={card._id} />;
+            else return <Card card={card} likeStatus={true} deleteStatus={false} render={getPosts}  key={card._id} />;
           } 
           else {
-            if (card.creator._id === user._id) return <Card card={card} likeState={false} deleteState={true} key={card._id} />;
-            else return <Card card={card} likeState={false} deleteState={false} key={card._id} />;
+            if (card.creator._id === user._id) return <Card card={card} likeStatus={false} deleteStatus={true} render={getPosts}  key={card._id} />;
+            else return <Card card={card} likeStatus={false} deleteStatus={false} render={getPosts}  key={card._id} />;
           }
         }) : ''}
       </div>

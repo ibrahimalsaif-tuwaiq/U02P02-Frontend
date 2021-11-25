@@ -1,0 +1,16 @@
+.postWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.userCard,
+.postCard {
+  border: 1px solid black;
+}
+
+.postIamge {
+  height: 30rem;
+  width: 100%;
+}

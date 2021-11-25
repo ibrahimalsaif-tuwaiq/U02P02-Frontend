@@ -5,66 +5,75 @@
 
 /* Header */
 
-.postLocation {
+.cardHeader {
   padding: 0.3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardLocation {
   display: flex;
   align-items: center;
 }
 
-.postLocation .locationIcon {
-  font-size: 120%;
+.cardLocation .locationIcon {
+  font-size: 130%;
 }
 
-.postLocation h6 {
+.cardLocation h6 {
   font-size: 98%;
   margin-left: 0.5rem;
 }
 
+.cardHeader .deleteIcon {
+  font-size: 120%;
+}
+
+.cardHeader .deleteIcon:hover {
+  cursor: pointer;
+  color: #4d5154;
+}
+
 /* Image */
 
-.card .postImage {
+.card .cardImage {
   width: 100%;
   height: 100%;
 }
 
 /* Status */
 
-.card .status {
+.card .cardFooter {
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.card .likeComment {
+.card .cardFooter .cardStatus {
   display: flex;
   align-items: center;
 }
 
-.card .likeComment .likeIcon {
+.card .cardFooter .cardStatus .likeIcon {
   color: red;
 }
 
-.card .likeComment .likeIcon,
-.card .likeComment .unLikeIcon,
-.card .likeComment .commentIcon {
+.card .cardFooter .cardStatus .likeIcon,
+.card .cardFooter .cardStatus .unLikeIcon,
+.card .cardFooter .cardStatus .commentIcon {
   margin-right: 0.2rem;
   font-size: 190%;
 }
 
-.card .likeComment .likeIcon:hover,
-.card .likeComment .unLikeIcon:hover,
-.card .likeComment .commentIcon:hover {
-  cursor: pointer;
-}
-
-.card .likeComment p {
+.card .cardFooter .cardStatus p {
   font-size: 140%;
   color: #262626;
   margin-right: 0.6rem;
 }
 
-.card .viewPost button {
+.card .cardFooter .viewPost button {
   font-size: 90%;
   border: none;
   padding: 0.2rem 0.4rem;
@@ -72,4 +81,10 @@
   background-color: #f7694d;
   color: white;
   font-weight: bold;
+}
+
+.card .cardFooter .cardStatus .likeIcon:hover,
+.card .cardFooter .cardStatus .unLikeIcon:hover,
+.card .cardFooter .cardStatus .commentIcon:hover {
+  cursor: pointer;
 }
