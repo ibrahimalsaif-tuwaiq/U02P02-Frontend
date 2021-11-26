@@ -23,11 +23,6 @@
   float: left;
 }
 
-/* .card .header .delete .deleteIcon:hover{
-  cursor: pointer;
-  color: rgb(163, 163, 163);
-} */
-
 .card .header .menu-content {
   margin: 0;
   padding: 0;

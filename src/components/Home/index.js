@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import NavBar from "./../NavBar";
 import Card from "./../Card";
@@ -12,8 +13,10 @@ const MySwal = withReactContent(Swal);
 const BASE_URL = "http://localhost:5000";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [postCards, setPostCards] = useState([]);
+  const [pageLoader, setPageLoader] = useState(true);
 
   useEffect(() => {
     getUserDetails();
@@ -24,13 +27,16 @@ const Home = () => {
   const getUserDetails = async () => {
     const userStorage = localStorage.getItem("user");
     const userData = JSON.parse(userStorage);
-    const res = await axios.get(`${BASE_URL}/users/${userData.id}`);
-    setUser(res.data);
+    if (userData) {
+      const res = await axios.get(`${BASE_URL}/users/${userData.id}`);
+      setUser(res.data);
+    }
   };
 
   const getPosts = async () => {
     const res = await axios.get(`${BASE_URL}/posts`);
     setPostCards(res.data);
+    setPageLoader(false);
   };
 
   const addPost = () => {
@@ -119,13 +125,23 @@ const Home = () => {
             <AiOutlinePlus />
           </button>
         </>
-      ) : (
-        <div className="loadingWrapper">
+      ) : pageLoader ? (
+        <div className="centerWrapper">
           <div className="lds-ring">
             <div></div>
             <div></div>
             <div></div>
             <div></div>
+          </div>
+        </div>
+      ) : (
+        <div className="centerWrapper">
+          <div className="signupLoginTitle">
+            <h1>YOU HAVE TO LOGIN FIRST</h1>
+          </div>
+          <div className="signupLoginButtons">
+            <button onClick={() => navigate("/login")}>Login</button>
+            <button onClick={() => navigate("/signup")}>Signup</button>
           </div>
         </div>
       )}

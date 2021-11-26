@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   margin: 0 auto;
-  max-width: 80%;
+  max-width: 90%;
   padding: 1.8rem 1.7rem;
   grid-gap: 1.9rem;
   align-items: stretch;
@@ -47,9 +47,10 @@
   border-color: #fff transparent transparent transparent;
 }
 
-.loadingWrapper {
+.centerWrapper {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -92,5 +93,50 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+.signupLoginTitle h1 {
+  font-size: 350%;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.signupLoginButtons button {
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 50px;
+  padding: 0.85rem 2.75rem;
+  margin: 2rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  background-color: #f7694d;
+  color: #fff;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 1200px) {
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
+
+  #fixedbutton {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
