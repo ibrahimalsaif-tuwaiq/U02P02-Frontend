@@ -16,6 +16,8 @@ const Card = ({ card, likeStatus, deleteStatus, render }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(likeStatus);
   const [userData, setUserData] = useState(null);
+  const [hover, setHover] = useState(false);
+  console.log(likeStatus);
 
   useEffect(() => {
     getUserData();
@@ -79,35 +81,59 @@ const Card = ({ card, likeStatus, deleteStatus, render }) => {
     });
   };
 
+  const toggleHover = () => {
+    setHover(!hover);
+  };
+
+  let WrapperStyle;
+  if (hover) {
+    WrapperStyle = {
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${card.image})`,
+    };
+  } else {
+    WrapperStyle = {
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)), url(${card.image})`,
+    };
+  }
+
   return (
     <div className="card">
-      <div className="cardHeader">
-        <div className="cardLocation">
-          <IoLocationSharp className="locationIcon" />
-          <h6>{card.location}</h6>
+      <div className="wrapper" style={WrapperStyle} onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
+        <div className="header">
+          <div className="delete">
+            {deleteStatus && (
+              <BsTrashFill className="deleteIcon icon" onClick={deletePost} />
+            )}
+          </div>
+          <ul className="menu-content">
+            <li>
+              {like ? (
+                <MdFavorite className="likeIcon icon" onClick={deleteLikedPost} />
+              ) : (
+                <MdFavorite className="unLikeIcon icon" onClick={likePost} />
+              )}
+              <span>{card.likes.length}</span>
+            </li>
+            <li>
+              <MdOutlineComment className="commentIcon icon" />
+              <span>{card.comments.length}</span>
+            </li>
+          </ul>
         </div>
-        {deleteStatus && (
-          <BsTrashFill className="deleteIcon" onClick={deletePost} />
-        )}
-      </div>
-      <img
-        className="cardImage"
-        src={card.image}
-        alt={`${card.location} post`}
-      ></img>
-      <div className="cardFooter">
-        <div className="cardStatus">
-          {like ? (
-            <MdFavorite className="likeIcon" onClick={deleteLikedPost} />
-          ) : (
-            <MdFavoriteBorder className="unLikeIcon" onClick={likePost} />
-          )}
-          <p>{card.likes.length}</p>
-          <MdOutlineComment className="commentIcon" />
-          <p>{card.comments.length}</p>
-        </div>
-        <div className="viewPost">
-          <button onClick={() => navigate(`/posts/${card._id}`)}>VIEW</button>
+        <div className="data">
+          <div className="content">
+            <h1 className="location">
+              <IoLocationSharp className="locationIcon" />
+              {card.location}
+            </h1>
+            <a
+              href="#"
+              className="view"
+              onClick={() => navigate(`/posts/${card._id}`)}
+            >
+              VIEW
+            </a>
+          </div>
         </div>
       </div>
     </div>
