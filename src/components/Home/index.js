@@ -21,11 +21,6 @@ const Home = () => {
     // eslint-disable-next-line
   }, []);
 
-  // useEffect(() => {
-  //   const userStorage = localStorage.getItem("user");
-  //   setUser(JSON.parse(userStorage));
-  // }, []);
-
   const getUserDetails = async () => {
     const userStorage = localStorage.getItem("user");
     const userData = JSON.parse(userStorage);
@@ -65,24 +60,76 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <NavBar />
-      <div className="cards">
-        {user ? postCards.map((card) => {
-          if (user.likes.find(post => post._id === card._id)) {
-            if (card.creator._id === user._id) return <Card card={card} likeStatus={true} deleteStatus={true} render={getPosts} key={card._id} />;
-            else return <Card card={card} likeStatus={true} deleteStatus={false} render={getPosts}  key={card._id} />;
-          } 
-          else {
-            if (card.creator._id === user._id) return <Card card={card} likeStatus={false} deleteStatus={true} render={getPosts}  key={card._id} />;
-            else return <Card card={card} likeStatus={false} deleteStatus={false} render={getPosts}  key={card._id} />;
-          }
-        }) : ''}
-      </div>
-      <button id="fixedbutton" onClick={addPost}>
-        <AiOutlinePlus />
-      </button>
-    </div>
+    <>
+      {user ? (
+        <>
+          <NavBar user={user} />
+          <div className="cards">
+            {postCards.map((card) => {
+              if (user.likes.find((post) => post._id === card._id)) {
+                if (card.creator._id === user._id)
+                  return (
+                    <Card
+                      card={card}
+                      user={user}
+                      likeStatus={true}
+                      deleteStatus={true}
+                      render={getPosts}
+                      key={card._id}
+                    />
+                  );
+                else
+                  return (
+                    <Card
+                      card={card}
+                      user={user}
+                      likeStatus={true}
+                      deleteStatus={false}
+                      render={getPosts}
+                      key={card._id}
+                    />
+                  );
+              } else {
+                if (card.creator._id === user._id)
+                  return (
+                    <Card
+                      card={card}
+                      user={user}
+                      likeStatus={false}
+                      deleteStatus={true}
+                      render={getPosts}
+                      key={card._id}
+                    />
+                  );
+                else
+                  return (
+                    <Card
+                      card={card}
+                      user={user}
+                      likeStatus={false}
+                      deleteStatus={false}
+                      render={getPosts}
+                      key={card._id}
+                    />
+                  );
+              }
+            })}
+          </div>
+          <button id="fixedbutton" onClick={addPost}>
+            <AiOutlinePlus />
+          </button>
+        </>
+      ) : (
+        <div className="loadingWrapper">
+          <div className="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

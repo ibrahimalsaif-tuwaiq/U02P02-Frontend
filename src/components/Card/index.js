@@ -1,38 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { IoLocationSharp } from "react-icons/io5";
 import { BsTrashFill } from "react-icons/bs";
-import { MdOutlineComment, MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { MdOutlineComment, MdFavorite } from "react-icons/md";
 import "./style.css";
 
 const MySwal = withReactContent(Swal);
 
 const BASE_URL = "http://localhost:5000";
 
-const Card = ({ card, likeStatus, deleteStatus, render }) => {
+const Card = ({ card, user, likeStatus, deleteStatus, render }) => {
   const navigate = useNavigate();
   const [like, setLike] = useState(likeStatus);
-  const [userData, setUserData] = useState(null);
   const [hover, setHover] = useState(false);
-  console.log(likeStatus);
-
-  useEffect(() => {
-    getUserData();
-    // eslint-disable-next-line
-  }, []);
-
-  const getUserData = () => {
-    const userStorage = localStorage.getItem("user");
-    setUserData(JSON.parse(userStorage));
-  };
 
   const likePost = async () => {
     setLike(true);
     await axios.put(`${BASE_URL}/posts/addLike`, {
-      userId: userData.id,
+      userId: user._id,
       postId: card._id,
     });
     render();
@@ -41,7 +29,7 @@ const Card = ({ card, likeStatus, deleteStatus, render }) => {
   const deleteLikedPost = async () => {
     setLike(false);
     await axios.put(`${BASE_URL}/posts/deleteLike`, {
-      userId: userData.id,
+      userId: user._id,
       postId: card._id,
     });
     render();
@@ -98,7 +86,12 @@ const Card = ({ card, likeStatus, deleteStatus, render }) => {
 
   return (
     <div className="card">
-      <div className="wrapper" style={WrapperStyle} onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
+      <div
+        className="wrapper"
+        style={WrapperStyle}
+        onMouseEnter={toggleHover}
+        onMouseLeave={toggleHover}
+      >
         <div className="header">
           <div className="delete">
             {deleteStatus && (
@@ -108,14 +101,17 @@ const Card = ({ card, likeStatus, deleteStatus, render }) => {
           <ul className="menu-content">
             <li>
               {like ? (
-                <MdFavorite className="likeIcon icon" onClick={deleteLikedPost} />
+                <MdFavorite
+                  className="likeIcon icon"
+                  onClick={deleteLikedPost}
+                />
               ) : (
                 <MdFavorite className="unLikeIcon icon" onClick={likePost} />
               )}
               <span>{card.likes.length}</span>
             </li>
             <li>
-              <MdOutlineComment className="commentIcon icon" />
+              <MdOutlineComment className="commentIcon icon" onClick={() => navigate(`/posts/${card._id}`)} />
               <span>{card.comments.length}</span>
             </li>
           </ul>
@@ -127,9 +123,8 @@ const Card = ({ card, likeStatus, deleteStatus, render }) => {
               {card.location}
             </h1>
             <a
-              href="#"
+              href={`/posts/${card._id}`}
               className="view"
-              onClick={() => navigate(`/posts/${card._id}`)}
             >
               VIEW
             </a>

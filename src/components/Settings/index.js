@@ -10,7 +10,7 @@ const MySwal = withReactContent(Swal);
 
 const BASE_URL = "http://localhost:5000";
 
-const Profile = () => {
+const Settings = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -101,4 +101,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default Settings;
