@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IoLocationSharp } from "react-icons/io5";
-import { BsTrashFill } from "react-icons/bs";
-import { MdOutlineComment, MdFavorite, MdFavoriteBorder } from "react-icons/md";
+import { MdOutlineComment, MdFavorite } from "react-icons/md";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -13,78 +12,234 @@ import "./style.css";
 const BASE_URL = "http://localhost:5000";
 
 const Post = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [post, setPost] = useState(null);
+  const [userPost, setUserPost] = useState(0);
   const [like, setLike] = useState(false);
+  const [follow, setFollow] = useState(false);
+  const [pageLoader, setPageLoader] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
-    getUser();
-    getPost();
+    getUserDetails();
+    // eslint-disable-next-line
   }, []);
 
-  const getUser = async () => {
+  const getUserDetails = async () => {
     const userStorage = localStorage.getItem("user");
     const userData = JSON.parse(userStorage);
-    const res = await axios.get(`${BASE_URL}/users/${userData.id}`);
-    setUser(res.data);
+    if (userData) {
+      const res = await axios.get(`${BASE_URL}/users/${userData.id}`);
+      setUser(res.data);
+      getPost(res.data);
+      getUserPosts(res.data);
+    }
   };
 
-  const getPost = async () => {
+  const getPost = async (user) => {
     const res = await axios.get(`${BASE_URL}/posts/${id}`);
     setPost(res.data);
-    if (user && user.likes.find((post) => post._id === res.data._id)) {
+    if (user.likes.find((post) => post._id === res.data._id)) {
       setLike(true);
+    }
+    if (user.following.find((follower) => follower === res.data.creator._id)) {
+      setFollow(true);
+    }
+    setPageLoader(false);
+  };
+
+  const getUserPosts = async (user) => {
+    const res = await axios.get(`${BASE_URL}/posts/user/${user._id}`);
+    setUserPost(res.data.length);
+  };
+
+  const likePost = async () => {
+    setLike(true);
+    await axios.put(`${BASE_URL}/posts/addLike`, {
+      userId: user._id,
+      postId: post._id,
+    });
+    getUserDetails();
+  };
+
+  const deleteLikedPost = async () => {
+    setLike(false);
+    await axios.put(`${BASE_URL}/posts/deleteLike`, {
+      userId: user._id,
+      postId: post._id,
+    });
+    getUserDetails();
+  };
+
+  const followUser = async () => {
+    await axios.put(`${BASE_URL}/users/followUser`, {
+      userId: user._id,
+      otherUserId: post.creator._id,
+    });
+    setFollow(true);
+    getUserDetails();
+  };
+
+  const unFollowUser = async () => {
+    await axios.put(`${BASE_URL}/users/unFollowUser`, {
+      userId: user._id,
+      otherUserId: post.creator._id,
+    });
+    setFollow(false);
+    getUserDetails();
+  };
+
+  const addcomment = async () => {
+    const comment = document.getElementById("shareCommentText").value;
+    if (comment.trim().length > 0) {
+      await axios.post(`${BASE_URL}/posts/addComment`, {
+        comment: comment,
+        postedBy: user._id,
+        postId: post._id,
+      });
+      getUserDetails();
     }
   };
 
   return (
     <>
-      <NavBar />
-      <div className="postWrapper">
-        <Container>
-          <Row>
-            <Col md={8}>
-              <div className="postCard">
-                <img src={post && post.image} className="postIamge"></img>
-                <p>{post && post.location}</p>
-                <p>{post && post.caption}</p>
-                <div className="status">
-                  <div className="likeComment">
-                    {like ? (
-                      <MdFavorite
-                        className="likeIcon"
-                        // onClick={deleteLikedPost}
+      {user ? (
+        post && (
+          <>
+            <NavBar user={user} />
+            <div className="postWrapper">
+              <Container>
+                <Row style={{ display: "flex", justifyContent: "center" }}>
+                  <Col lg={7}>
+                    <div className="postCard">
+                      <img src={post.image} alt={`${post.location}`}></img>
+                      <p className="postLocation">
+                        <IoLocationSharp className="postlocationIcon" />
+                        {post.location}
+                      </p>
+                      <div className="postStatus">
+                        {like ? (
+                          <MdFavorite
+                            className="likeIcon"
+                            onClick={deleteLikedPost}
+                          />
+                        ) : (
+                          <MdFavorite
+                            className="unLikeIcon"
+                            onClick={likePost}
+                          />
+                        )}
+                        <span>{post.likes.length}</span>
+                        <MdOutlineComment className="commentIcon" />
+                        <span>{post.comments.length}</span>
+                      </div>
+                      <p className="postCaption">{post.caption}</p>
+                      <h4 className="commentsTitle">Comments</h4>
+                      <div className="shareCommentContainer">
+                        <div className="shareCommentUser">
+                          <img
+                            src={user.avatar}
+                            alt={`${user.username} avatar`}
+                          ></img>
+                          <p>{user.username}</p>
+                        </div>
+                        <textarea
+                          id="shareCommentText"
+                          placeholder="Write a comment.."
+                        ></textarea>
+                        <button
+                          className="shareCommentButton"
+                          onClick={addcomment}
+                        >
+                          Share
+                        </button>
+                      </div>
+                      <ul className="commentsWrapper">
+                        {post &&
+                          post.comments.map((comment, index) => {
+                            return (
+                              <li className="commentBox" key={index}>
+                                <div className="commentBoxUser">
+                                  <img
+                                    src={comment.postedBy.avatar}
+                                    alt={`${comment.postedBy.username} avatar`}
+                                  ></img>
+                                  <p>{comment.postedBy.username}</p>
+                                </div>
+                                <h6>{comment.comment}</h6>
+                              </li>
+                            );
+                          })}
+                      </ul>
+                    </div>
+                  </Col>
+                  <Col lg={4}>
+                    <div className="userCard">
+                      <img
+                        src={post.creator.avatar}
+                        alt={`${post.creator.username} avatar`}
+                        className="userCardImage"
                       />
-                    ) : (
-                      <MdFavoriteBorder
-                        className="unLikeIcon"
-                        // onClick={likePost}
-                      />
-                    )}
-                    <p>{post && post.likes.length}</p>
-                    <MdOutlineComment className="commentIcon" />
-                    <p>{post && post.comments.length}</p>
-                  </div>
-                </div>
-                <ul>
-                {post && post.comments.map( comment => {
-                  return <li>{comment.postedBy.avatar}</li>
-                })}
-                </ul>
-              </div>
-            </Col>
-            <Col md={4}>
-              <div className="userCard">
-                <img src={post && post.creator.avatar}></img>
-                <p>{post && post.creator.username}</p>
-                <p>{post && post.creator.following.length}</p>
-                <p>{post && post.creator.followers.length}</p>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </div>
+                      <div className="userCardUsername">
+                        <h2>{post.creator.username}</h2>
+                      </div>
+                      <div className="userCardInfo">
+                        <div className="userCardInfoItem">
+                          <span className="userCardStats">{userPost}</span>
+                          <span>posts</span>
+                        </div>
+                        <div className="userCardInfoItem">
+                          <span className="userCardStats">
+                            {post.creator.followers.length}
+                          </span>
+                          <span>followers</span>
+                        </div>
+                        <div className="userCardInfoItem">
+                          <span className="userCardStats">
+                            {post.creator.following.length}
+                          </span>
+                          <span>following</span>
+                        </div>
+                      </div>
+                      {post.creator._id === user._id ? (
+                        ""
+                      ) : follow ? (
+                        <div className="userCardFollowButton">
+                          <button onClick={unFollowUser}>unfollow</button>
+                        </div>
+                      ) : (
+                        <div className="userCardFollowButton">
+                          <button onClick={followUser}>follow</button>
+                        </div>
+                      )}
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+            </div>
+          </>
+        )
+      ) : pageLoader ? (
+        <div className="centerWrapper">
+          <div className="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      ) : (
+        <div className="centerWrapper">
+          <div className="signupLoginTitle">
+            <h1>YOU HAVE TO LOGIN FIRST</h1>
+          </div>
+          <div className="signupLoginButtons">
+            <button onClick={() => navigate("/login")}>Login</button>
+            <button onClick={() => navigate("/signup")}>Signup</button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
