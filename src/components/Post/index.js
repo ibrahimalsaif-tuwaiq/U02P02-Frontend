@@ -164,8 +164,9 @@ const Post = () => {
                                   <img
                                     src={comment.postedBy.avatar}
                                     alt={`${comment.postedBy.username} avatar`}
+                                    onClick={() => navigate(`/users/${comment.postedBy._id}`)}
                                   ></img>
-                                  <p>{comment.postedBy.username}</p>
+                                  <p onClick={() => navigate(`/users/${comment.postedBy._id}`)}>{comment.postedBy.username}</p>
                                 </div>
                                 <h6>{comment.comment}</h6>
                               </li>
@@ -180,9 +181,10 @@ const Post = () => {
                         src={post.creator.avatar}
                         alt={`${post.creator.username} avatar`}
                         className="userCardImage"
+                        onClick={() => navigate(`/users/${post.creator._id}`)}
                       />
                       <div className="userCardUsername">
-                        <h2>{post.creator.username}</h2>
+                        <h2 onClick={() => navigate(`/users/${post.creator._id}`)}>{post.creator.username}</h2>
                       </div>
                       <div className="userCardInfo">
                         <div className="userCardInfoItem">

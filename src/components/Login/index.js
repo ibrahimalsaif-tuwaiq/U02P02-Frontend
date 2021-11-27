@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
 
@@ -37,10 +37,16 @@ const Login = () => {
   return (
     <div className="loginWrapper">
       {user ? (
-        <h1>
-          You already loggedin, you don't need to signup. go to{" "}
-          <Link to="/">home</Link>
-        </h1>
+        <>
+          <div className="centerWrapper">
+            <div className="homeTitle">
+              <h1>You already loggedin, you don't need to login</h1>
+            </div>
+            <div className="homeButtons">
+              <button onClick={() => navigate("/home")}>home</button>
+            </div>
+          </div>
+        </>
       ) : (
         <main className="panel">
           <div className="panel__half half--first">
@@ -71,9 +77,9 @@ const Login = () => {
           <div className="panel__half half--second">
             <h2>Hello, friend!</h2>
             <p>Enter your personal details and start your journey with us</p>
-            <div id="signupButton">
-              <Link to="/signup">Sign up</Link>
-            </div>
+            <button id="signupButton" onClick={() => navigate("/signup")}>
+              Sign up
+            </button>
           </div>
         </main>
       )}

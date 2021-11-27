@@ -1,27 +1,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap");
 
-:root {
-  --page-bg: #f9f5f2;
-  --bg: #f0f4f3;
-  --theme: #f7694d;
-  --theme-two: #ffffff;
-  --text: #697a79;
-}
-
 .loginWrapper {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--page-bg);
+  background-color: #fafaee;
 }
 
 main.panel {
   max-width: 900px;
   width: 90vw;
-  background: var(--theme-two);
+  background: white;
   border-radius: 20px;
-  box-shadow: 0 2px 5px -6px var(--text), 0 0 30px -50px var(--text);
+  box-shadow: 0 2px 5px -6px #697a79, 0 0 30px -50px #697a79;
   display: flex;
 }
 
@@ -66,7 +58,7 @@ main.panel form input {
   width: 200px;
   border-radius: 50px;
   padding: 1rem 0.75rem;
-  background: var(--bg);
+  background: #f0f4f3;
   border: none;
   color: inherit;
   font-family: "Outfit", sans-serif;
@@ -96,31 +88,60 @@ main.panel #signupButton {
 }
 
 .panel__half.half--first #submitButton {
-  background: var(--theme);
-  color: var(--theme-two);
+  background: #457B9D;
+  color: white;
 }
 
 .panel__half.half--first #submitButton:hover {
+  background-color: #7099b4;
   cursor: pointer;
 }
 
 .panel__half.half--second {
-  background: var(--theme-two);
-  color: var(--theme);
+  background: white;
+  color: #457B9D;
 }
 
 .panel__half.half--second #signupButton:hover {
+  background-color: #7099b4;
   cursor: pointer;
 }
 
 .panel__half.half--second {
-  background: var(--theme);
-  color: var(--theme-two);
+  background: #457B9D;
+  color: white;
   padding: 2rem;
   flex-grow: 1;
   border-radius: inherit;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.homeTitle h1 {
+  font-size: 300%;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+}
+
+.homeButtons button {
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 50px;
+  padding: 0.85rem 2.75rem;
+  margin: 2rem;
+  text-transform: uppercase;
+  font-family: "Open Sans", sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1rem;
+  background-color: #457b9d;
+  color: #fff;
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.homeButtons button:hover {
+  background-color: #6f9bb6;
+  cursor: pointer;
 }
 
 @media (max-width: 650px) {

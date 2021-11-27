@@ -55,7 +55,7 @@ const Card = ({ card, user, likeStatus, deleteStatus, render }) => {
           text: "Your post has been deleted",
           icon: "success",
           confirmButtonText: "OK",
-          confirmButtonColor: "#2A1DD1",
+          confirmButtonColor: "#457B9D",
         });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         MySwal.fire({
@@ -63,7 +63,7 @@ const Card = ({ card, user, likeStatus, deleteStatus, render }) => {
           text: "Your post is safe :)",
           icon: "error",
           confirmButtonText: "OK",
-          confirmButtonColor: "#2A1DD1",
+          confirmButtonColor: "#457B9D",
         });
       }
     });

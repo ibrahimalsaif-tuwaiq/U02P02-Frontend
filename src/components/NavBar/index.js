@@ -44,7 +44,7 @@ const NavBar = ({ user }) => {
   };
 
   return (
-    <AppBar position="static" style={{ background: "#f9f5f2" }}>
+    <AppBar position="static" style={{ background: "#1d3557" }}>
       <Container maxWidth="xl">
         <Toolbar>
           <Typography
@@ -63,9 +63,8 @@ const NavBar = ({ user }) => {
               aria-haspopup="true"
               onClick={handleOpenNavMenu}
               color="inherit"
-              style={{ align: "center" }}
             >
-              <MenuIcon style={{ color: "black" }} />
+              <MenuIcon style={{ color: "white" }} />
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -154,7 +153,7 @@ const NavBar = ({ user }) => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={() => navigate("/timeline")}>
+              <MenuItem onClick={() => navigate(`/users/${user._id}`)}>
                 <Typography textAlign="center">
                   <FaUser /> Profile
                 </Typography>

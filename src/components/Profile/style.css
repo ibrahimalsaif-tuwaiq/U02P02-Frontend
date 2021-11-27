@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 .profileWrapper {
   display: flex;
   flex-direction: column;
@@ -6,7 +9,9 @@
 }
 
 .profileBox {
-  margin: 1rem 0;
+  min-width: 50%;
+  max-width: 90%;
+  margin: 2rem 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -15,8 +20,23 @@
 
 .profileBox img {
   border-radius: 50%;
-  height: 5rem;
-  width: 5rem;
+  height: 7rem;
+  width: 7rem;
+}
+
+.profileBox h3 {
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.profileBox p {
+  margin-top: 1rem;
+  font-family: 'Open Sans', sans-serif;
+  width: 50%;
+  word-wrap: break-word;
+  text-align: center;
 }
 
 .profileBox .profileInfo {
@@ -24,6 +44,8 @@
   margin-top: 1rem;
   display: flex;
   justify-content: space-around;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: bold;
 }
 
 .profileBox .profileInfo .profileInfoItem {
@@ -32,12 +54,49 @@
   align-items: center;
 }
 
+.profileBox .userCardFollowButton {
+  margin-top: 2rem;
+}
+
+.profileBox .userCardFollowButton button {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  border: none;
+  background-color: #457B9D;
+  text-transform: uppercase;
+  font-family: 'Open Sans', sans-serif;
+  color: white;
+}
+
+.profileBox .userCardFollowButton button:hover {
+  cursor: pointer;
+  background-color: #6a9bb9;
+}
+
 .postCards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
   margin: 0 auto;
-  /* max-width: 90%; */
+  max-width: 90%;
   padding: 1.8rem 1.7rem;
   grid-gap: 1.9rem;
   align-items: stretch;
+}
+
+@media screen and (max-width: 1200px) {
+  .postCards {
+    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .postCards {
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .postCards {
+    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  }
 }

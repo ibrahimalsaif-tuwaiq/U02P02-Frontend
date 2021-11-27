@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./style.css";
 
 const Landing = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -12,20 +13,20 @@ const Landing = () => {
 
   return (
     <div className="landingPageWrapper">
-      <h1>Welcome to travellers</h1>
+      <img className="logoLanding" src="/logo.png" alt="website logo" />
       {user ? (
         <div className="userButtons">
-          <div className="landingButton" id="homeButton">
-            <Link to="/home">home</Link>
+          <div className="landingButton">
+            <button onClick={() => navigate("/home")}>home</button>
           </div>
         </div>
       ) : (
         <div className="notUserButtons">
-          <div className="landingButton" id="signupButton">
-            <Link to="/signup">signup</Link>
+          <div className="landingButton">
+            <button onClick={() => navigate("/signup")}>signup</button>
           </div>
-          <div className="landingButton" id="loginButton">
-            <Link to="/login">login</Link>
+          <div className="landingButton">
+            <button onClick={() => navigate("/login")}>login</button>
           </div>
         </div>
       )}

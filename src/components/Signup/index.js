@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
 
-const BASE_URL='http://localhost:5000';
+const BASE_URL = "http://localhost:5000";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const Signup = () => {
   }, []);
 
   const signup = async () => {
-    setMessage('');
+    setMessage("");
     const res = await axios.post(`${BASE_URL}/signup`, {
       username: username,
       email: email,
@@ -36,31 +36,34 @@ const Signup = () => {
     <div className="signupWrapper">
       {user ? (
         <h1>
-          You already loggedin, you don't need to signup. go to{" "}
-          <Link to="/">home</Link>
+          <div className="centerWrapper">
+            <div className="homeSignupTitle">
+              <h1>You already loggedin, you don't need to signup</h1>
+            </div>
+            <div className="homeSignupButtons">
+              <button onClick={() => navigate("/home")}>home</button>
+            </div>
+          </div>
         </h1>
       ) : (
         <main className="signupPanel">
           <div className="signupPanel__half signupHalf--first">
             <h2>Hello, friend!</h2>
             <p>If you are already registered, login now</p>
-            <div id="loginButton">
-              <Link
-                to="/login"
-                style={{
-                  textDecoration: "none",
-                  color: "#ffffff",
-                  fontFamily: "Outfit",
-                }}
-              >
-                login
-              </Link>
-            </div>
+            <button id="loginButton" onClick={() => navigate("/login")}>
+              login
+            </button>
           </div>
           <div className="signupPanel__half signupHalf--second">
             <h2>Signup</h2>
             {message ? <div className="message">{message}</div> : ""}
-            <form className="signupInput" onSubmit={(e) => {e.preventDefault(); signup(e);}}>
+            <form
+              className="signupInput"
+              onSubmit={(e) => {
+                e.preventDefault();
+                signup(e);
+              }}
+            >
               <input
                 type="text"
                 placeholder="Username"

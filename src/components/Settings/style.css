@@ -1,44 +1,76 @@
-/* .profileWrapper {
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+.settingsWrapper {
+  height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.profileBox {
-  border: 1px solid black;
-  margin: 2rem;
+.settingsProfileBox {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 2rem;
-  width: 60%;
   border-radius: 1.75rem;
 }
 
-.userInfo {
-  display: flex;
-}
-
-.userInfo img {
-  height: 3rem;
-  width: 3rem;
-  border-radius: 1.7rem;
-}
-
-.userInfo p {
-  font-size: 180%;
-  font-weight: bold;
-  margin-left: 1rem;
-}
-
-.editUser {
+.settingsProfileBox .settingsUserInfo {
   display: flex;
   flex-direction: column;
-  width: 30%;
+}
+
+.settingsProfileBox .settingsUserInfo img {
+  height: 7rem;
+  width: 7rem;
+  border-radius: 50%;
+}
+
+.settingsProfileBox .settingsUserInfo p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 180%;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.settingsProfileBox .UserSettings {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.settingsProfileBox .UserSettings .UserSettingItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.settingsProfileBox .UserSettings .UserSettingItem .labelItem{
+  width: 80%;
 }
 
 .editUserIcon {
-  font-size: 130%;
+  font-size: 170%;
   margin-left: 1rem;
 }
 
 .editUserIcon:hover {
   cursor: pointer;
-} */
+}
+
+@media screen and (max-width: 1000px) {
+  .settingsProfileBox {
+    width: 70%;
+    flex-direction: column;
+  }
+
+  .settingsProfileBox .settingsUserInfo {
+    margin-bottom: 1rem;
+  }
+
+  .settingsProfileBox .UserSettings {
+    width: 80%;
+  }
+}

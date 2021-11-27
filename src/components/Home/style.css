@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
@@ -17,7 +19,7 @@
   right: 1rem;
   width: 3rem;
   height: 3rem;
-  background-color: #f7694d;
+  background-color: #457b9d;
   color: #fff;
   border-radius: 3.125rem;
   border: none;
@@ -25,7 +27,7 @@
 
 #fixedbutton:hover {
   cursor: pointer;
-  background-color: #ec5638;
+  background-color: #6392af;
 }
 
 .lds-ring {
@@ -41,10 +43,10 @@
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 8px solid #fff;
+  border: 8px solid #1d3557;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+  border-color: #1d3557 transparent transparent transparent;
 }
 
 .centerWrapper {
@@ -69,10 +71,10 @@
   width: 64px;
   height: 64px;
   margin: 8px;
-  border: 8px solid rgb(0, 0, 0);
+  border: 8px solid #1d3557;
   border-radius: 50%;
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: rgb(0, 0, 0) transparent transparent transparent;
+  border-color: #1d3557 transparent transparent transparent;
 }
 
 .lds-ring div:nth-child(1) {
@@ -98,7 +100,7 @@
 
 .signupLoginTitle h1 {
   font-size: 350%;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .signupLoginButtons button {
@@ -108,15 +110,19 @@
   padding: 0.85rem 2.75rem;
   margin: 2rem;
   text-transform: uppercase;
+  font-family: "Open Sans", sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.1rem;
-  background-color: #f7694d;
+  background-color: #457b9d;
   color: #fff;
   font-size: 120%;
   font-weight: bold;
 }
 
-/* Media Queries */
+.signupLoginButtons button:hover {
+  background-color: #6f9bb6;
+  cursor: pointer;
+}
 
 @media screen and (max-width: 1200px) {
   .cards {

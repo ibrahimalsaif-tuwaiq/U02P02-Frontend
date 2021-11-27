@@ -20,13 +20,22 @@ const Profile = () => {
   const [userPosts, setUserPosts] = useState([]);
   const [userLikes, setUserLikes] = useState([]);
   const [pageLoader, setPageLoader] = useState(true);
+  const [follow, setFollow] = useState(false);
   const [value, setValue] = useState(0);
 
   useEffect(() => {
     getUsers();
     getUserPosts();
+    if (user) {
+      checkIfFollow();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [id]);
+
+  useEffect(() => {
+    checkIfFollow();
+    // eslint-disable-next-line
+  }, [user, userProfile]);
 
   const getUsers = async () => {
     const userStorage = localStorage.getItem("user");
@@ -39,6 +48,14 @@ const Profile = () => {
     setUserProfile(res.data);
   };
 
+  const checkIfFollow = () => {
+    if (user && userProfile) {
+      if (user.following.find((follower) => follower === userProfile._id)) {
+        setFollow(true);
+      }
+    }
+  };
+
   const getUserPosts = async () => {
     const res = await axios.get(`${BASE_URL}/posts/user/${id}`);
     setUserPosts(res.data);
@@ -49,6 +66,26 @@ const Profile = () => {
     const res = await axios.get(`${BASE_URL}/posts/likes/${id}`);
     setUserLikes(res.data);
     setPageLoader(false);
+  };
+
+  const followUser = async () => {
+    await axios.put(`${BASE_URL}/users/followUser`, {
+      userId: user._id,
+      otherUserId: userProfile._id,
+    });
+    setFollow(true);
+    getUsers();
+    renderCards();
+  };
+
+  const unFollowUser = async () => {
+    await axios.put(`${BASE_URL}/users/unFollowUser`, {
+      userId: user._id,
+      otherUserId: userProfile._id,
+    });
+    setFollow(false);
+    getUsers();
+    renderCards();
   };
 
   const renderCards = () => {
@@ -88,16 +125,25 @@ const Profile = () => {
                     <span>following</span>
                   </div>
                 </div>
+                {userProfile._id === user._id ? (
+                  ""
+                ) : follow ? (
+                  <div className="userCardFollowButton">
+                    <button onClick={unFollowUser}>unfollow</button>
+                  </div>
+                ) : (
+                  <div className="userCardFollowButton">
+                    <button onClick={followUser}>follow</button>
+                  </div>
+                )}
               </div>
-              <Box sx={{ width: 1000 }}>
+              <Box sx={{ width: "100%" }}>
                 <BottomNavigation
                   showLabels
                   value={value}
-                  className="navv"
                   onChange={(event, newValue) => {
                     setValue(newValue);
-                    renderCards()
-                    // value ? getUserLikes() : getUserPosts();
+                    renderCards();
                   }}
                 >
                   <BottomNavigationAction

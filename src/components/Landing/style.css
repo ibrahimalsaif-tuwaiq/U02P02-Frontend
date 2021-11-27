@@ -1,31 +1,42 @@
 .landingPageWrapper {
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: var(--page-bg);
+  background-color: #1D3557;
+}
+
+.logoLanding {
+  height: 4rem;
+  width: 25rem;
 }
 
 .userButtons,
 .notUserButtons {
+  margin-top: 2rem;
+  width: 30%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 }
 
-.landingButton {
+.landingButton button {
   background: none;
   border: 1px solid currentColor;
   border-radius: 50px;
   padding: 0.85rem 2.75rem;
-  margin: 2rem 0;
+  margin: 2rem;
   text-transform: uppercase;
+  font-family: "Open Sans", sans-serif;
   font-size: 0.8rem;
   letter-spacing: 0.1rem;
+  background-color: #ffffff;
+  color: black;
+  font-weight: bold;
 }
 
-/* .notUserButtons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
+.landingButton button:hover {
+  background-color: #F1FAEE;
+  cursor: pointer;
+}

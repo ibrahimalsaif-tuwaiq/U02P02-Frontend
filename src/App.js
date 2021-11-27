@@ -23,8 +23,6 @@ const App = () => {
         <Route exact path="/settings" element={<Settings />} />
         <Route exact path="/posts/:id" element={<Post />} />
         <Route exact path="/users/:id" element={<Profile />} />
-        {/* <Route exact path="/users/:id/likes" element={} /> */}
-        {/* <Route exact path="/users/:id/posts" element={} /> */}
       </Routes>
     </>
   );
