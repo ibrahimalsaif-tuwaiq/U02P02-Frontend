@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Settings from "./components/Settings";
 import Post from "./components/Post";
+import Profile from "./components/Profile";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -21,7 +22,7 @@ const App = () => {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/settings" element={<Settings />} />
         <Route exact path="/posts/:id" element={<Post />} />
-        {/* <Route exact path="/users/:id" element={} /> */}
+        <Route exact path="/users/:id" element={<Profile />} />
         {/* <Route exact path="/users/:id/likes" element={} /> */}
         {/* <Route exact path="/users/:id/posts" element={} /> */}
       </Routes>

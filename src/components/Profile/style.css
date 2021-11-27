@@ -1,0 +1,43 @@
+.profileWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.profileBox {
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profileBox img {
+  border-radius: 50%;
+  height: 5rem;
+  width: 5rem;
+}
+
+.profileBox .profileInfo {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.profileBox .profileInfo .profileInfoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.postCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(40rem, 1fr));
+  margin: 0 auto;
+  /* max-width: 90%; */
+  padding: 1.8rem 1.7rem;
+  grid-gap: 1.9rem;
+  align-items: stretch;
+}
