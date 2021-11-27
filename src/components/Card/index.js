@@ -10,7 +10,7 @@ import "./style.css";
 
 const MySwal = withReactContent(Swal);
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://u02p02-backend.herokuapp.com";
 
 const Card = ({ card, user, likeStatus, deleteStatus, render }) => {
   const navigate = useNavigate();

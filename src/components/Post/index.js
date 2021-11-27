@@ -9,7 +9,7 @@ import axios from "axios";
 import NavBar from "./../NavBar";
 import "./style.css";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://u02p02-backend.herokuapp.com";
 
 const Post = () => {
   const navigate = useNavigate();

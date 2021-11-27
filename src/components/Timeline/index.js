@@ -4,7 +4,7 @@ import axios from "axios";
 import NavBar from "./../NavBar";
 import Card from "./../Card";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://u02p02-backend.herokuapp.com";
 
 const Timeline = () => {
   const navigate = useNavigate();

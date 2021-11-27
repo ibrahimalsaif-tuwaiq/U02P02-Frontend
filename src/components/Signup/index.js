@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./style.css";
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://u02p02-backend.herokuapp.com";
 
 const Signup = () => {
   const navigate = useNavigate();

@@ -11,7 +11,7 @@ import "./style.css";
 
 const MySwal = withReactContent(Swal);
 
-const BASE_URL = "http://localhost:5000";
+const BASE_URL = "https://u02p02-backend.herokuapp.com";
 
 const Settings = () => {
   const navigate = useNavigate();
@@ -30,7 +30,6 @@ const Settings = () => {
     }
     // eslint-disable-next-line
   }, [url]);
-
 
   const getUser = async () => {
     const userStorage = localStorage.getItem("user");
@@ -82,7 +81,6 @@ const Settings = () => {
       });
       MySwal.fire("Done", "", "success");
     }
-    getUser();
   };
 
   const editBio = async () => {
@@ -102,7 +100,6 @@ const Settings = () => {
         about: bio,
       });
       MySwal.fire("Done", "", "success");
-      getUser();
     }
   };
 
