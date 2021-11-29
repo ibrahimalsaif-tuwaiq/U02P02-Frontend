@@ -1,6 +1,6 @@
 # TRAVELLERS
 
-This a soical media website where travelers can share their photos and memories of spots they been to, and you can create your own timeline by following some travelers, and also each user have his/her own likes.
+Is a soical media website where travelers can share their photos and memories of spots they been to, and you can create your own timeline by following some travelers, and also each user have his/her own likes.
 
 Heroku Link: https://u02p02-frontend.herokuapp.com/
 
